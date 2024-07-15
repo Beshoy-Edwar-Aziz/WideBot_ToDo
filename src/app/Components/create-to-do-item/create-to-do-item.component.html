@@ -1,0 +1,68 @@
+<section>
+    <div class="container">
+    <h1 class="display-3 text-center mb-5">ToDo List</h1>
+    <div class="d-flex gap-2 my-3 justify-content-center">
+      <input type="text" class="form-control w-50 input" [(ngModel)]="searchValue" placeholder="Search Note">
+      <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#warningmodal"><i class="fas fa-trash"></i> Clear List</button>
+    </div>
+    <main class="position-relative">
+    <div class="container p-3">
+            <!-- UnOrderedList to show todo list -->
+      <ul class="list-unstyled">
+            @for (toDoItem of toDoData|search:searchValue; track $index) 
+            {
+                <div class="d-flex flex-column flex-lg-row justify-content-lg-between my-2 border-bottom pb-2">
+                    <li class="kanit-medium font-20" [ngClass]="toDoItem?.check?'text-decoration-line-through text-secondary': 'text-decoration-none'"><input (change)="boxChecked($index)" type="checkbox" id="checkbox"  class="form-control"  class="font-20" [checked]="toDoItem.check==true"> {{toDoItem.Title}}</li>
+                    <button class="btn btn-outline-danger" (click)="deleteLocalStorageItem($index)"><i class="fas fa-trash"></i> Delete Item</button>
+                </div>   
+            }
+        </ul>
+      <!-- In case of not finding data inside localstorage -->
+      @if(toDoData?.length==0||toDoData==null){
+        <div class="w-50 text-center m-auto">
+            <img src="assets/Detective-check-footprint 1.svg" class="w-100" alt="ToDoList">
+            <p class="kanit-regular font-20">Empty....</p>
+        </div>
+       }
+    </div>
+    <div class="position-fixed translate-middle addBtn" data-bs-target="#addModal" data-bs-toggle="modal">
+        <button class="btn rounded-circle"><i class="fas fa-plus text-white" ></i></button>
+    </div>
+    </main>
+    <!-- Modal to show warning to user prior to deleting the whole list -->
+    <div class="modal fade" id="warningmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+           
+            <div class="modal-body text-center">
+                <div class="d-flex flex-column justify-content-center">
+                    <i class="fas fa-warning text-danger fs-1"></i>
+                    <h2>Warning</h2>
+                    <p>Are You Sure You Want To Delete The Whole List?</p>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteAll()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal for adding notes to todo list -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="text-center">NEW NOTE</h2>
+                <input type="text" id="inputField"  class="form-control" placeholder="Input Your Note...">
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn addtolistbtn text-white" data-bs-dismiss="modal" (click)="addToDoList()">Add To List</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+  

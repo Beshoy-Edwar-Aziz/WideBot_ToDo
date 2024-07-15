@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500&display=swap');
+.kanit-regular {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .kanit-medium {
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  .font-20{
+    font-size: 20px;
+  }
+  .checkbox-color{
+    color:#6C63FF !important;
+  }
+  #inputField{
+    border: 1px #6C63FF solid;
+    outline: none !important;
+    box-shadow: none;
+  }
+  .addBtn{
+    left: 95%;
+    top: 95%;
+    background-color: #6C63FF;
+    border-radius: 50%;
+    transition: background-color .5s;
+  }
+  .addBtn:hover{
+    background-color: #000;
+  }
+  .addtolistbtn{
+    background-color: #6C63FF;
+  }
+ 
