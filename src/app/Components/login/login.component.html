@@ -1,0 +1,33 @@
+<section>
+    <div class="container shadow-lg">
+        <div class="row">
+            <form (submit)="handleLogin()" [formGroup]="logUser" class="col-md-8 d-flex flex-column w-50 m-auto">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" class="" formControlName="email" placeholder="Email">
+                    @if(logUser.get('email')?.touched&&logUser.get('email')?.errors){
+                    <mat-hint class="text-danger">This Field is Required</mat-hint>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Password">
+                    @if
+                    (logUser.get('password')?.touched&&logUser.get('password')?.errors&&logUser.get('password')?.getError('required'))
+                    {
+                    <mat-hint class="text-danger">Password is required</mat-hint>
+                    }
+                    @else if
+                    (logUser.get('password')?.touched&&logUser.get('password')?.errors&&logUser.get('password')?.getError('pattern'))
+                    {
+                    <mat-hint class="text-danger">Password must have a number, an uppercase, a lowercase and a symbol</mat-hint>
+                    }
+                </mat-form-field>
+                <button [disabled]="logUser.invalid" mat-raised-button class="btn btn-success">Login</button>
+            </form>
+            <div class="col-md-4">
+                <img src="assets/signin-image.jpg" alt="SignIn">
+            </div>
+        </div>
+    </div>
+</section>

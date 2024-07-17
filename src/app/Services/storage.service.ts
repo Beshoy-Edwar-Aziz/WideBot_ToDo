@@ -7,6 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 export class StorageService {
 
   constructor() { }
+  localstorage:BehaviorSubject<any>=new BehaviorSubject('');
+  currentLocal=this.localstorage.asObservable();
+  updateLocal(newValue:any){
+    console.log(newValue);
+    this.localstorage.next(newValue);
+  }
   storage:BehaviorSubject<any>= new BehaviorSubject('');
   currentStorage = this.storage.asObservable();
   updateStorage(newData:any){
